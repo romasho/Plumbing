@@ -1,0 +1,4 @@
+.tmp-sheets/
+server/data/
+dist/
+node_modules/

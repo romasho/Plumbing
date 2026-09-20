@@ -1,0 +1,48 @@
+<section class="page">
+  <div class="page-head">
+    <div>
+      <h1>Leads</h1>
+      <p>New customer requests awaiting dispatch.</p>
+    </div>
+  </div>
+  <div class="lead-layout">
+    <div class="lead-list card">
+      <div class="list-head">
+        <b>Open leads</b><span>{{ store.leads().length }} incoming</span>
+      </div>
+      <button
+        *ngFor="let lead of store.leads()"
+        (click)="selectedLead.set(lead)"
+        [class.selected]="selectedLead()?.id === lead.id"
+      >
+        <span class="lead-icon">◌</span>
+        <div>
+          <b>{{ lead.name }}</b
+          ><small>{{ lead.type }} · {{ lead.source }}</small>
+        </div>
+        <em>›</em>
+      </button>
+    </div>
+    <article class="lead-detail card" *ngIf="selectedLead() as lead; else choose">
+      <div class="lead-top">
+        <span>LEAD {{ lead.id }}</span
+        ><b>New</b>
+      </div>
+      <h2>{{ lead.name }}</h2>
+      <p>{{ lead.phone }} · {{ lead.source }}</p>
+      <hr />
+      <label>REQUEST</label>
+      <h3>{{ lead.type }}</h3>
+      <p>{{ lead.note }}</p>
+      <button class="primary" (click)="formOpen.set(true)">Create a job →</button>
+      <app-job-form *ngIf="formOpen()" [lead]="lead" (closed)="formOpen.set(false)" />
+    </article>
+    <ng-template #choose
+      ><article class="lead-detail empty card">
+        <span>◌</span>
+        <h2>Select a lead</h2>
+        <p>Review the request and create a job for your field team.</p>
+      </article></ng-template
+    >
+  </div>
+</section>

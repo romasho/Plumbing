@@ -1,0 +1,32 @@
+<div class="shell">
+  <aside class="sidebar" [class.open]="sidebarOpen()">
+    <a class="brand" routerLink="/dashboard" (click)="sidebarOpen.set(false)"
+      ><span class="brand-mark">Y</span><span>YMC <b>PLUMBING</b></span></a
+    >
+    <p class="nav-label">WORKSPACE</p>
+    <nav>
+      <a routerLink="/dashboard" routerLinkActive="active"><span>▦</span> Overview</a
+      ><a routerLink="/leads" routerLinkActive="active"><span>◌</span> Leads <em>3</em></a
+      ><a routerLink="/jobs" routerLinkActive="active"
+        ><span>▣</span> Field jobs <em>{{ jobsToday() }}</em></a
+      >
+    </nav>
+    <div class="sidebar-footer">
+      <span class="avatar">AM</span>
+      <div><b>Alex Morgan</b><small>Dispatch manager</small></div>
+    </div>
+  </aside>
+  <main>
+    <header>
+      <button class="menu" (click)="sidebarOpen.set(!sidebarOpen())">☰</button>
+      <div class="header-copy">
+        <small>Operations /</small><span>Field service management</span>
+      </div>
+      <div class="sync">
+        <i [class.offline]="syncState() === 'offline'"></i> Shared job data {{ syncState() }}
+      </div>
+      <span class="avatar">AM</span>
+    </header>
+    <router-outlet />
+  </main>
+</div>

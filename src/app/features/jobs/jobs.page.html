@@ -1,0 +1,53 @@
+<section class="page">
+  <div class="page-head">
+    <div>
+      <h1>Field jobs</h1>
+      <p>Track dispatch, field progress and completed visits.</p>
+    </div>
+    <button class="primary" (click)="creating.set(true)">+ New job</button>
+  </div>
+  <div class="jobs-layout">
+    <div class="card table-wrap">
+      <div class="table-head">
+        <span>JOB</span><span>CUSTOMER</span><span>SCHEDULE</span><span>TECHNICIAN</span
+        ><span>STATUS</span>
+      </div>
+      <button class="table-row" *ngFor="let job of store.jobs()" (click)="selected.set(job)">
+        <span class="job-id">{{ job.id }}</span
+        ><span
+          ><b>{{ job.customerName }}</b
+          ><small>{{ job.type }}</small></span
+        ><span
+          >{{ job.scheduledDate }}<small>{{ job.startTime }}–{{ job.endTime }}</small></span
+        ><span>{{ job.technician }}</span
+        ><span class="status {{ job.status }}">{{ job.status }}</span>
+      </button>
+    </div>
+    <aside class="card detail" *ngIf="selected() as job; else noSelection">
+      <div class="detail-top">
+        <b>{{ job.id }}</b
+        ><button (click)="selected.set(null)">×</button>
+      </div>
+      <h2>{{ job.customerName }}</h2>
+      <p>{{ job.type }} · {{ job.phone }}</p>
+      <div class="address">⌖ {{ job.address }}, {{ job.city }} {{ job.zip }}</div>
+      <div class="status-actions" *ngIf="job.status !== 'Completed' && job.status !== 'Cancelled'">
+        <button *ngIf="job.status === 'New'" (click)="setStatus('In Progress')">Start work</button
+        ><button *ngIf="job.status === 'In Progress'" (click)="setStatus('Completed')">
+          Complete job</button
+        ><button class="cancel" (click)="setStatus('Cancelled')">Cancel</button>
+      </div>
+      <h3>Activity</h3>
+      <div class="history" *ngFor="let activity of job.activities">
+        <i></i><b>{{ activity.text }}</b
+        ><small>{{ activity.at }}</small>
+      </div>
+    </aside>
+    <ng-template #noSelection
+      ><aside class="card no-selection">
+        Select a job to view its dispatch details and history.
+      </aside></ng-template
+    >
+  </div>
+  <app-job-form *ngIf="creating()" (closed)="creating.set(false)" />
+</section>

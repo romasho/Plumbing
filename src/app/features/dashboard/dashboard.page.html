@@ -1,0 +1,53 @@
+<section class="page">
+  <div class="page-head">
+    <div>
+      <h1>Good morning, Alex</h1>
+      <p>Here is what is happening across your field team today.</p>
+    </div>
+    <a class="primary" routerLink="/leads">+ Create job from a lead</a>
+  </div>
+  <div class="metrics">
+    <div class="card">
+      <small>ACTIVE JOBS</small><b>{{ store.activeCount() }}</b
+      ><span>Scheduled or underway</span>
+    </div>
+    <div class="card">
+      <small>IN PROGRESS</small><b>{{ inProgress() }}</b
+      ><span>Technicians currently working</span>
+    </div>
+    <div class="card">
+      <small>COMPLETED TODAY</small><b>{{ completed() }}</b
+      ><span>Finished field visits</span>
+    </div>
+    <div class="card integrations">
+      <small>CONNECTED</small><b>2</b><span>Google Sheets · Slack</span>
+    </div>
+  </div>
+  <div class="content-grid">
+    <div class="card jobs">
+      <div class="section-title">
+        <div>
+          <h2>Today's schedule</h2>
+          <p>Live status from the shared mobile workflow</p>
+        </div>
+        <a routerLink="/jobs">View all →</a>
+      </div>
+      <div class="job-row" *ngFor="let job of store.jobs()">
+        <div class="time">{{ job.startTime }}</div>
+        <div>
+          <b>{{ job.customerName }}</b
+          ><small>{{ job.type }} · {{ job.address }}</small>
+        </div>
+        <div class="tech">{{ job.technician }}</div>
+        <span class="status {{ job.status }}">{{ job.status }}</span>
+      </div>
+    </div>
+    <div class="card activity">
+      <h2>Activity history</h2>
+      <div *ngFor="let job of store.jobs().slice(0, 3)">
+        <i></i><b>{{ job.activities[0].text }}</b
+        ><small>{{ job.id }} · {{ job.activities[0].at }}</small>
+      </div>
+    </div>
+  </div>
+</section>

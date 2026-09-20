@@ -1,0 +1,52 @@
+{
+  "name": "ymc-plumbing",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "api": "node --env-file-if-exists=server/.env server/server.mjs",
+    "dev": "concurrently \"npm run api\" \"npm start\"",
+    "build": "ng build",
+    "export:excel": "node server/integrations/export-job-history-to-excel.mjs",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "private": true,
+  "packageManager": "npm@11.19.0",
+  "dependencies": {
+    "@angular/common": "^22.1.0",
+    "@angular/compiler": "^22.1.0",
+    "@angular/core": "^22.1.0",
+    "@angular/forms": "^22.1.0",
+    "@angular/platform-browser": "^22.1.0",
+    "@angular/router": "^22.1.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "^22.5.0",
+    "@angular-eslint/eslint-plugin": "^22.5.0",
+    "@angular-eslint/eslint-plugin-template": "^22.5.0",
+    "@angular-eslint/schematics": "^22.5.0",
+    "@angular/build": "^22.1.8",
+    "@angular/cli": "^22.1.8",
+    "@angular/compiler-cli": "^22.1.0",
+    "@eslint/js": "^10.0.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "angular-eslint": "^22.5.0",
+    "concurrently": "^10.0.5",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.5.1",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2"
+  }
+}

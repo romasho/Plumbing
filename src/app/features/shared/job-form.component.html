@@ -1,0 +1,67 @@
+<div class="overlay">
+  <form class="modal" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="modal-head">
+      <div>
+        <span>DISPATCH</span>
+        <h2>Create field job</h2>
+      </div>
+      <button type="button" (click)="closed.emit()">×</button>
+    </div>
+    <p class="hint">Create a work order and send it to the technician’s mobile queue.</p>
+    <div class="form-grid">
+      <label
+        >First name *<input formControlName="firstName" /><small
+          *ngIf="form.controls.firstName.touched && form.controls.firstName.invalid"
+          >Required</small
+        ></label
+      ><label
+        >Last name *<input formControlName="lastName" /><small
+          *ngIf="form.controls.lastName.touched && form.controls.lastName.invalid"
+          >Required</small
+        ></label
+      ><label
+        >Phone *<input formControlName="phone" /><small
+          *ngIf="form.controls.phone.touched && form.controls.phone.invalid"
+          >Required</small
+        ></label
+      ><label>Email<input formControlName="email" /></label
+      ><label
+        >Job source<select formControlName="source">
+          <option>Phone</option>
+          <option>Website</option>
+          <option>Google Ads</option>
+          <option>Referral</option>
+          <option>Walk-in</option>
+        </select></label
+      ><label
+        >Job type<select formControlName="type">
+          <option>Pipe Leak</option>
+          <option>Drain Cleaning</option>
+          <option>Water Heater</option>
+          <option>Inspection</option>
+        </select></label
+      ><label class="full"
+        >Service address *<input formControlName="address" placeholder="Street address" /></label
+      ><label>City<input formControlName="city" /></label
+      ><label>ZIP code<input formControlName="zip" /></label
+      ><label>Scheduled date *<input type="date" formControlName="scheduledDate" /></label
+      ><label
+        >Technician *<select formControlName="technician">
+          <option>Mike Torres</option>
+          <option>Sarah Kim</option>
+          <option>Jordan Lee</option>
+        </select></label
+      ><label>Start time *<input type="time" formControlName="startTime" /></label
+      ><label>End time *<input type="time" formControlName="endTime" /></label
+      ><label class="full"
+        >Job description<textarea formControlName="description" rows="2"></textarea>
+      </label>
+    </div>
+    <div class="form-actions">
+      <button type="button" (click)="closed.emit()">Cancel</button
+      ><button class="primary" [disabled]="saving">
+        {{ saving ? 'Creating…' : 'Create & assign job' }}
+      </button>
+    </div>
+  </form>
+</div>
